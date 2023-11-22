@@ -1,10 +1,14 @@
 import ReactDOM from 'react-dom/client'
 import { BrowserRouter } from 'react-router-dom'
-import { AppRouter } from './components/App.Routes.jsx'
+import { AppRouter } from './App.Routes.jsx'
 import './index.css'
+import { AuthProvider } from './providers/AuthProvider.jsx'
 
 ReactDOM.createRoot(document.getElementById('root')).render(
-  <BrowserRouter>
-    <AppRouter />
-  </BrowserRouter>,
+
+  <AuthProvider>
+    <BrowserRouter>
+      <AppRouter />
+    </BrowserRouter>
+  </AuthProvider>
 )
