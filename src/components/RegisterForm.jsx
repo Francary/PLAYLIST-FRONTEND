@@ -40,13 +40,14 @@ const RegisterForm = () => {
 
     return(
         <>
-        <h2>Register</h2>
-        <form onSubmit={handleSubmint} ref={ref}>
-            <input type="url" placeholder="www.my-avatar.com" name="avatar"/>
-            <input type="email" placeholder="test@gmail.com" name="email"/>
-            <input type="text" placeholder="Usuario" name="username"/>
-            <input type="password" placeholder="password" name="password"/>
-            <button>Register</button>
+        <form className="text-bg-warning m-5 p-5 rounded-5" onSubmit={handleSubmint} ref={ref}>
+            <h2>Register</h2>              
+            <input className="form-control m-3" type="url" placeholder="www.my-avatar.com" name="avatar"/>
+            <input className="form-control m-3" type="email" placeholder="test@gmail.com" name="email"/>
+            <input className="form-control m-3" type="text" placeholder="Usuario" name="username"/>
+            <input className="form-control m-3" type="password" placeholder="password" name="password"/>
+            <button className="btn btn-primary">Register</button>
+            
 
         </form>
 

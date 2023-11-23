@@ -45,11 +45,11 @@ const LoginForm = () => {
 
     return(
         <>
-        <h2>Login</h2>
-        <form onSubmit={handleSubmint} ref={ref}>
-            <input type="email" placeholder="test@gmail.com" name="email" />
-            <input type="password" placeholder="password" name="password"/>
-            <button>Login</button>
+        <form className="text-bg-warning m-5 p-5 rounded-5" onSubmit={handleSubmint} ref={ref}>
+            <h2>Login</h2>
+            <input className="form-control m-3" type="email" placeholder="test@gmail.com" name="email" />
+            <input className="form-control m-3" type="password" placeholder="password" name="password"/>
+            <button className="btn btn-primary">Login</button>
 
         </form>
 
