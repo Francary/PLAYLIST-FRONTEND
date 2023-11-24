@@ -5,11 +5,21 @@ import { AuthContext } from "../providers/AuthProvider.jsx"
 import Swal from 'sweetalert2'
 
 const NewMusicPage = () => {
-    const { playlistId} = useParams()
-
-    const {auth} = useContext(AuthContext)
+    const { playlistId} = useParams();
     const [playlist , setPlayList] = useState(null)
+    const {auth} = useContext(AuthContext)
     const navigate = useNavigate()
+
+    const getPlayList = (playlistId) =>{
+        fetch(`${API_URL}/playlist/${playlistId}`,{
+            headers:{
+                Authorization : auth.token
+            }
+        })
+        .then((res) => res.json())
+        .then((data) => setPlayList(data))
+    }
+
 
     const handleSubmint = async (e) =>{
         e.preventDefault()
@@ -48,30 +58,25 @@ const NewMusicPage = () => {
                   })
             }
         })
-
-    }
-
-
-    const getPlayList = (playlistId) =>{
-        fetch(`${API_URL}/playlist/${playlistId}`,{
-            headers:{
-                Authorization : auth.token
-            }
-        })
-        .then((res) => res.json())
-        .then((data) => setPlayList(data))
-
     }
 
     useEffect(() => {
         getPlayList(playlistId)
     },[])
 
+    if (!playlist) {
+        return (
+          <div className="container-fluid d-flex flex-column justify-content-center align-items-center mt-4">
+            <h3 className="text-center mt-4">Loading...</h3>
+          </div>
+        );
+      }
+
     return (
         <div className="container-fluid d-flex flex-column justify-content-center aling-items-center mt-4">
-        <h1 className="text-center">NEW MUSIC PARA LA PLAY LIST : "{playlistId}"</h1>
-        <div className="container-fluid d-flex flex-column justify-content-center aling-items-center mt-4">
-             <form className="container "  onSubmit={handleSubmint}>
+            <h1 className="text-center">NEW MUSIC PARA LA PLAY LIST : "{playlist.title}"</h1>
+            <div className="container-fluid d-flex flex-column justify-content-center aling-items-center mt-4">
+            <form className="container "  onSubmit={handleSubmint}>
 
                 <div className="form-floating d-flex gap-4">
                     <input type="text" name="name" id="name" className="form-control" placeholder="Song Name"/>
@@ -89,8 +94,7 @@ const NewMusicPage = () => {
                 <button className="btn btn-success" type="submit" >Create</button>
 
             </form>
-         
-        </div>
+            </div>
         </div>
     )
 }
