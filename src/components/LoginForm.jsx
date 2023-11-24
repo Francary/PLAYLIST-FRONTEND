@@ -1,7 +1,7 @@
 import { useRef , useContext} from "react";
 import { API_URL } from "../utils/consts.js";
 import { AuthContext } from "../providers/AuthProvider.jsx";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const LoginForm = () => {
 
@@ -43,18 +43,17 @@ const LoginForm = () => {
     }
 
 
-    return(
-        <>
-        <form className="text-bg-warning m-5 p-5 rounded-5" onSubmit={handleSubmint} ref={ref}>
+    return(         
+        <form className="text-bg-warning m-5 p-5 rounded-5 w-25 " onSubmit={handleSubmint} ref={ref}>
             <h2>Login</h2>
             <input className="form-control m-3" type="email" placeholder="test@gmail.com" name="email" />
             <input className="form-control m-3" type="password" placeholder="password" name="password"/>
-            <button className="btn btn-primary">Login</button>
-
+            <div className="d-flex gap-5">
+                <button className="btn btn-primary" type="submit">Login</button>
+                <Link className="btn btn-primary" to="/register">Register</Link>
+            </div>
         </form>
-
        
-        </>
     )
 }
 

@@ -1,5 +1,5 @@
 import { useRef } from "react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { API_URL } from "../utils/consts.js";
 
 const RegisterForm = () => {
@@ -40,18 +40,17 @@ const RegisterForm = () => {
 
     return(
         <>
-        <form className="text-bg-warning m-5 p-5 rounded-5" onSubmit={handleSubmint} ref={ref}>
+        <form className="container text-bg-warning m-5 p-5 rounded-5 w-25" onSubmit={handleSubmint} ref={ref}>
             <h2>Register</h2>              
             <input className="form-control m-3" type="url" placeholder="www.my-avatar.com" name="avatar"/>
             <input className="form-control m-3" type="email" placeholder="test@gmail.com" name="email"/>
             <input className="form-control m-3" type="text" placeholder="Usuario" name="username"/>
             <input className="form-control m-3" type="password" placeholder="password" name="password"/>
-            <button className="btn btn-primary">Register</button>
-            
-
-        </form>
-
-       
+            <div className="d-flex gap-5">
+                <button className="btn btn-primary" type="submit">Register</button>
+                <Link className="btn btn-primary" to="/login">Login</Link>
+            </div>
+        </form>     
         </>
     )
 }

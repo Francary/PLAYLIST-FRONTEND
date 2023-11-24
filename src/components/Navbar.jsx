@@ -1,6 +1,10 @@
-import { Link , NavLink } from "react-router-dom"
+import { useContext } from "react"
+import { NavLink } from "react-router-dom"
+import { AuthContext } from "../providers/AuthProvider.jsx"
+
 
 const Navbar = () => {
+const {logout} = useContext(AuthContext)
     return (
 <nav className="navbar navbar-expand-lg bg-body-tertiary" data-bs-theme="dark">
   <div className="container-fluid">
@@ -16,16 +20,22 @@ const Navbar = () => {
            }}  aria-current="page" to="/">Home</NavLink>
         </li>
         <li className="nav-item">
+          <NavLink className="nav-link " aria-current="page" to="/playlist">Play List</NavLink>
+        </li>
+        <li className="nav-item">
+          <NavLink className="nav-link " aria-current="page" to="/playlist/new">Agregate</NavLink>
+        </li>
+        <li className="nav-item">
           <NavLink className="nav-link " aria-current="page" to="/register">Register</NavLink>
         </li>
         <li className="nav-item">
           <NavLink className="nav-link " aria-current="page" to="/login">Login</NavLink>
         </li>
-        <li className="nav-item">
-          <NavLink className="nav-link " aria-current="page" to="/playlist">Play List</NavLink>
-        </li>
       </ul>
     </div>
+      <div className="d-flex" role="search">
+        <button onClick={logout} className="btn btn-outline-danger btn-sm" type="submit">Logout</button>
+      </div>
   </div>
 </nav>
     )
