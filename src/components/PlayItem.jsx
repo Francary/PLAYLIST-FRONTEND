@@ -14,11 +14,7 @@ const PlayItem = ({playlistId, title,avatar, username , musics , refresh}) => {
             headers: {
                 Authorization: auth.token
             }
-        })
-            
-            
-        
-
+        })  
     }
 
     return (

@@ -7,7 +7,7 @@ import Swal from 'sweetalert2'
 
 const MusicPage = () => {
 
-    const { playlistId} = useParams()
+    const { playlistId } = useParams()
     const {auth} = useContext(AuthContext)
     const [playlist , setPlayList] = useState(null)
 
@@ -30,7 +30,11 @@ const MusicPage = () => {
                 Authorization: auth.token
             }
         })
+    }
+    const handleEdit = (playlistId , musicId) =>{
 
+        return alert("Esto es un handleEdit")
+        
     }
 
     useEffect(() => {
@@ -45,17 +49,19 @@ const MusicPage = () => {
         )
     }
 
+   
     return(
     <div className="container-fluid d-flex flex-column justify-content-center aling-items-center mt-4">
-        
-        <h1 className="text-center">{playlist.title}</h1>
-        <h1 className="text-center">{playlist.author.username}</h1>
-        <img className="img-fluid rounded-circle w-25" src={playlist.author.avatar}/>
+        <h1 className="text-center">Nombre de Play List : {playlist.title}</h1>
+        <div className="container-fluid d-flex  justify-content-center aling-items-center w-25">
+            <img className="img-fluid rounded-circle w-25" src={playlist.author.avatar}/>
+            <h1 className="text-center">{playlist.author.username}</h1>
+        </div>
         <div>
         <Link className="btn btn-success" to={`/music/${playlistId}`}>Create</Link>
         </div>
         
-        <div>
+        
             <table className="table">
             <thead>
                 <tr>
@@ -73,7 +79,11 @@ const MusicPage = () => {
                             <td>{music.artist}</td>
                             <td>{music.year}</td>
                             <td>
-                            <button className="btn btn-outline-primary btn-sm m-1" ><BsPencilFill   /></button>
+                            <Link className="btn btn-outline-primary btn-sm m-1" 
+                            onClick={handleEdit}
+                            
+
+                            ><BsPencilFill/></Link>
                             <Link className="btn btn-outline-danger btn-sm m-1"
                                 onClick={() =>{
                                     Swal.fire({
@@ -84,50 +94,42 @@ const MusicPage = () => {
                                         confirmButtonColor: "#3085d6",
                                         cancelButtonColor: "#d33",
                                         confirmButtonText: "Yes, delete it!"
-                                        }).then((result) => {
-                                        if (result.isConfirmed) {
-                                            handleDelete(playlistId , music._id).then((res) => {
-                                                if (res.status !== 204){
-                                                    Swal.fire({
-                                                        icon: "error",
-                                                        title: "Que estas haciendo",
-                                                        text: "Eres bruto como vas enviar un campo vacio",
-                                                        footer: '<a href="#">Debes hacer un curso</a>',
-                                                        timer: 1500
+                                    }).then((result) => {
+                                    if (result.isConfirmed) {
+                                        handleDelete(playlistId , music._id).then((res) => {
+                                            if (res.status !== 204){
+                                                Swal.fire({
+                                                    icon: "error",
+                                                    title: "Que estas haciendo",
+                                                    text: "Eres bruto como vas enviar un campo vacio",
+                                                    footer: '<a href="#">Debes hacer un curso</a>',
+                                                    timer: 1500
                                                         });
-                                                } else {
-                                                    Swal.fire({
-                                                        title: "Deleted!",
-                                                        text: "Your file has been deleted.",
-                                                        icon: "success"
-                                                        }); 
-                                                        getPlayList(playlistId )
+                                            } else {
+                                                Swal.fire({
+                                                    title: "Deleted!",
+                                                    text: "Your file has been deleted.",
+                                                    icon: "success"
+                                                    }); 
+                                                    getPlayList(playlistId )
                                                 }
                                             })
         
                                         }
-                                        });
+                                    });
                                 }
                             }
-                            
                             > <BsFillTrash3Fill/></Link>
                             </td>
                             </tr>   
-
-
                         )
                     })
-                }
-
-              
+                }            
             </tbody>
             </table>
-        </div>
-
+        
     </div>
     )
-
-
 }
 
 export {MusicPage}

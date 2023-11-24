@@ -8,6 +8,7 @@ import { PrivateRoutes } from "./components/Private.Routes.jsx"
 import { NewPlayListPage } from "./pages/NewPlayListPage.jsx"
 import { MusicPage } from "./pages/MusicPage.jsx"
 import { NewMusicPage } from "./pages/NewMusicPage.jsx"
+import { EditMusicPage } from "./pages/EditMusicPage.jsx"
 
 const AppRouter = () => {
     return (
@@ -20,6 +21,7 @@ const AppRouter = () => {
                 <Route  path="/playlist/new" element= {<NewPlayListPage/>} />
                 <Route  path="/playlist/:playlistId" element={<MusicPage />}/>
                 <Route  path="/music/:playlistId" element={<NewMusicPage />}/>
+                <Route path="/music/:playlistId/:musicId" element={<EditMusicPage/>}/>
 
             </Route>
             <Route  path="/register" element = {<RegisterForm/>}/>
